@@ -28,7 +28,8 @@ from torch.cuda.amp import autocast
 from nanolm.model import NanoLM, PRESET_CONFIGS
 from nanolm.tokenizer import load_tokenizer
 from nanolm.dataset import MemmapDataset, create_dataloader
-from nanolm.utils import get_device, get_gpu_memory_info
+from nanolm.utils import get_device
+from nanolm.trainer import get_gpu_memory_info
 
 
 def parse_args():

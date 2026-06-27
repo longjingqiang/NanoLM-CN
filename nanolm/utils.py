@@ -175,11 +175,20 @@ def plot_training_curve(log_path: str, save_path: Optional[str] = None):
         save_path: 图片保存路径（None 则显示）
     """
     try:
+        import matplotlib
+        matplotlib.use("Agg")  # 非交互后端，避免 tk 依赖
         import matplotlib.pyplot as plt
         import matplotlib.style as style
     except ImportError:
         print("⚠️  请安装 matplotlib: pip install matplotlib")
         return
+
+    # 设置中文字体
+    _cn_fonts = [f.name for f in matplotlib.font_manager.fontManager.ttflist
+                 if any(k in f.name for k in ("YaHei", "SimHei", "SimSun", "Heiti", "Songti", "Noto Sans CJK"))]
+    if _cn_fonts:
+        plt.rcParams["font.sans-serif"] = [_cn_fonts[0]] + plt.rcParams["font.sans-serif"]
+        plt.rcParams["axes.unicode_minus"] = False
 
     with open(log_path) as f:
         log = json.load(f)
@@ -192,10 +201,6 @@ def plot_training_curve(log_path: str, save_path: Optional[str] = None):
     train_losses = log.get("train_losses", [])
     if train_losses:
         ax.plot(train_losses, alpha=0.6, label="训练损失", color="#3498db")
-        # 平滑曲线
-        if len(train_losses) > 10:
-            smooth = np.convolve(train_losses, np.ones(10)/10, mode="valid")
-            ax.plot(range(9, len(train_losses)), smooth, label="平滑", color="#e74c3c")
     ax.set_xlabel("步数 (×log_interval)")
     ax.set_ylabel("损失")
     ax.set_title("训练损失")
