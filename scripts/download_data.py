@@ -17,7 +17,6 @@ HuggingFace 数据集。国内用户默认走 hf-mirror.com 镜像加速。
 
 import os
 import argparse
-from huggingface_hub import hf_hub_download
 
 
 def parse_args():
@@ -42,23 +41,20 @@ def parse_args():
 
 
 def download_dataset(args):
-    """下载 HuggingFace Hub 上的单个数据文件。"""
+    """下载 HuggingFace Hub 上的单个数据文件。
+
+    必须在 os.environ["HF_ENDPOINT"] 设置之后调用，
+    因为 huggingface_hub 在导入时读取该环境变量。
+    """
+    from huggingface_hub import hf_hub_download
+
     current_dir = os.getcwd()
-    cache_dir = os.path.join(current_dir, ".hf_cache")
-    os.makedirs(cache_dir, exist_ok=True)
-
-    # 国内镜像加速（可选）
-    if args.mirror:
-        os.environ["HF_ENDPOINT"] = args.mirror
-    os.environ["HUGGINGFACE_HUB_CACHE"] = cache_dir
-
     save_path = os.path.join(current_dir, args.save_dir)
     os.makedirs(save_path, exist_ok=True)
 
     print(f"🚀 开始下载数据集...")
     print(f"📦 仓库: {args.repo_id}")
     print(f"📄 文件: {args.filename}")
-    print(f"📁 缓存: {cache_dir}")
     print(f"💾 保存到: {save_path}")
     if args.mirror:
         print(f"🌐 镜像: {args.mirror}")
@@ -81,4 +77,10 @@ def download_dataset(args):
 
 if __name__ == "__main__":
     args = parse_args()
+
+    # 必须在 import huggingface_hub 之前设置，否则镜像不生效
+    if args.mirror:
+        os.environ["HF_ENDPOINT"] = args.mirror
+    os.environ["HUGGINGFACE_HUB_CACHE"] = os.path.join(os.getcwd(), ".hf_cache")
+
     download_dataset(args)
