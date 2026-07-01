@@ -1,0 +1,28 @@
+# NanoLM 依赖
+# 安装命令: pip install -r requirements.txt
+
+# ─── 核心依赖 ─────────────────────────────────────────────────────────────────
+# PyTorch (CUDA 版本，根据你的 CUDA 版本选择)
+# CUDA 12.1: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+# CUDA 11.8: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+# CPU 版本:   pip install torch torchvision
+torch>=2.0.0
+numpy>=1.24.0
+
+# ─── 可选但推荐 ───────────────────────────────────────────────────────────────
+# 数据处理
+tqdm>=4.65.0          # 进度条
+
+# 可视化
+matplotlib>=3.7.0     # 训练曲线绘制
+
+# 实验追踪 (可选)
+# wandb                # 权重与偏差实验平台
+# tensorboard          # TensorBoard 日志
+
+# 数据集下载 (可选)
+# datasets>=2.14.0     # Hugging Face 数据集
+# huggingface_hub      # 模型/数据集下载
+
+# ─── 开发依赖 ─────────────────────────────────────────────────────────────────
+# pytest>=7.0.0       # 单元测试

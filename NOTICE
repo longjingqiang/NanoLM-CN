@@ -1,0 +1,43 @@
+NanoLM-CN
+Copyright 2026 NanoLM-CN Contributors
+
+This product includes software developed by the NanoLM-CN project.
+
+---
+
+Third-Party Acknowledgments
+============================
+
+1. nanoGPT
+   - Author: Andrej Karpathy
+   - License: MIT
+   - URL: https://github.com/karpathy/nanoGPT
+   - Usage: Architectural reference for the decoder-only Transformer
+     implementation in nanolm/model.py and nanolm/trainer.py.
+
+2. BELLE
+   - Author: LianjiaTech (BELLE Group)
+   - License: Apache License 2.0
+   - URL: https://github.com/LianjiaTech/BELLE
+   - Usage: Source of the Chinese instruction-tuning dataset
+     (Belle_open_source_0.5M.json) used to train the released
+     model checkpoints.
+   - Note: The BELLE dataset itself was generated using OpenAI's
+     ChatGPT API. As stated by the BELLE project, the dataset and
+     any models derived from it are intended for research and
+     non-commercial use only, subject to OpenAI's Terms of Service.
+
+3. PyTorch
+   - License: BSD-3-Clause
+   - URL: https://github.com/pytorch/pytorch
+   - Usage: Deep learning framework dependency.
+
+---
+
+Disclaimer
+==========
+
+This project is released for academic research and personal learning
+purposes. The released model weights are derived from the BELLE dataset
+and inherit its non-commercial-use restriction. The authors make no
+warranty regarding the accuracy or safety of generated outputs.
