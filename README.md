@@ -74,7 +74,7 @@ python scripts/quickstart.py
 #### 1. 安装
 
 ```bash
-git clone https://github.com/yourusername/NanoLM-CN.git
+git clone https://github.com/longjingqiang/NanoLM-CN.git
 cd NanoLM-CN
 
 # 安装 PyTorch（CUDA 12.6）
